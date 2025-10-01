@@ -5,6 +5,15 @@
  * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
  * to expose Node.js functionality from the main process.
  */
+function listProducts(products){
+    for (prod of products){
+        document.getElementById('products').innerHTML += `<li id="prod-${prod.id}">${prod.name}</li>`
+    }
+    }
+async function getProducts(id){
+    product= await window.exposed.getProductInfo(id)
+document.getElementById('product-info').innerHTML = `${product.name} ${product.price}`
+}
 
 (async() => {
 
@@ -13,5 +22,11 @@
     
     // Run a function sends data to main.js
     await window.exposed.sendStuffToMain('Stuff from renderer')
-    
+
+    listProducts(await window.exposed.getProducts())
 })()
+
+
+document.getElementById('products').addEventListener('click', (e) =>{
+    getProducts(e.target.id.split('-')[1])
+})

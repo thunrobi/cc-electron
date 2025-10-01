@@ -1,8 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -33,6 +33,18 @@ app.whenReady().then(() => {
 // Example functions for communication between main and renderer (backend/frontend)
 ipcMain.handle('get-stuff-from-main', () => 'Stuff from main!')
 ipcMain.handle('send-stuff-to-main', async (event, data) => console.log(data))
+
+
+//"databas"
+const products = [
+  {id:1, name: "hat", price: 25.9 },
+  {id:2, name: "shirt", price: 60 },
+  {id:3, name: "shoes", price: 120 }
+
+]
+
+ipcMain.handle('get-products', () => products)
+ipcMain.handle('get-product-info', async (event,id) => products[id-1])
 
 
 app.on('window-all-closed', function () {
