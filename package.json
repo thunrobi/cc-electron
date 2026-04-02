@@ -18,7 +18,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "dependencies": {
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.0",
     "electron": "^38.2.0"
   },
   "devDependencies": {
